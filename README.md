@@ -1,7 +1,7 @@
 # 🎬 Affilab Studio App - Livewire Implementation
 
 [![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)]()
-[![Laravel](https://img.shields.io/badge/Laravel-11.x-red)]()
+[![Laravel](https://img.shields.io/badge/Laravel-12.x-red)]()
 [![Livewire](https://img.shields.io/badge/Livewire-3.x-blue)]()
 [![PHP](https://img.shields.io/badge/PHP-8.2%2B-purple)]()
 
