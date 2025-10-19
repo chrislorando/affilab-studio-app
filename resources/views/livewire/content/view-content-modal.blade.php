@@ -100,14 +100,20 @@
                     </div>
                 </div>
 
-                <!-- Style -->
-                <div>
-                    <flux:label>{{ __('Style') }}</flux:label>
-                    <p>
-                        <flux:badge variant="solid" :color="$content->style->color()" size="lg" class="mt-2">
-                            {{ $content->style->label() }}
-                        </flux:badge>
-                    </p>
+                <!-- Duration & Style -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <flux:label>{{ __('Duration') }}</flux:label>
+                        <p class="mt-2 text-sm font-medium text-zinc-900 dark:text-white">⏱️ {{ $content->duration ?? 15 }}s</p>
+                    </div>
+                    <div>
+                        <flux:label>{{ __('Style') }}</flux:label>
+                        <p>
+                            <flux:badge variant="solid" :color="$content->style->color()" size="sm" class="mt-2">
+                                {{ $content->style->label() }}
+                            </flux:badge>
+                        </p>
+                    </div>
                 </div>
 
                 <!-- Idea Text -->

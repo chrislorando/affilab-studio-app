@@ -59,6 +59,11 @@
                     
                     <div class="flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-400">
                         <span>📐 {{ $content->aspect_ratio->label() }}</span>
+                        <span>⏱️ {{ $content->duration ?? 15 }}s</span>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs text-zinc-500 dark:text-zinc-400">
+                        <span></span>
                         <span>{{ $content->created_at->diffForHumans() }}</span>
                     </div>
 

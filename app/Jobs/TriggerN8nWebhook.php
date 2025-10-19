@@ -54,6 +54,7 @@ class TriggerN8nWebhook implements ShouldQueue
                 'idea' => $content->idea,
                 'aspect_ratio' => $content->aspect_ratio,
                 'style' => $content->style->value,
+                'duration' => $content->duration,
                 'image_ref' => $content->image_ref,
                 'user_id' => $content->user_id,
                 'status' => $content->status->value,

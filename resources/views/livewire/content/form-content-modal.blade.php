@@ -17,9 +17,9 @@
                     <flux:textarea
                         label="{{ __('Your Idea') }}"
                         wire:model="idea"
-                        placeholder="Ex : Iklan jaket parka | Untuk motoran biar ga masuk angin | Anti diterjang badai | Cowok"
+                        placeholder="Ex : Iklan jaket parka cowok untuk motoran biar ga masuk angin, Anti diterjang badai."
                         rows="4"
-                        description="Format : Iklan [Ide] | Untuk [Masalah] | [CTA] | [Karakter]"
+                        {{-- description="Format : Iklan [Ide] | Untuk [Masalah] | [CTA] | [Karakter]" --}}
                     />
                 </div>
 
@@ -45,6 +45,17 @@
                     <flux:radio.group wire:model="style" label="Style" variant="segmented">
                         <flux:radio label="Professional" value="professional" />
                         <flux:radio label="Absurd" value="absurd" />
+                        <flux:radio label="Cinematic" value="cinematic" />
+                        <flux:radio label="Documentary" value="documentary" />
+                        <flux:radio label="Unboxing" value="unboxing" />
+                    </flux:radio.group>
+                </div>
+
+                <!-- Duration -->
+                <div>
+                    <flux:radio.group wire:model="duration" label="Duration" variant="segmented">
+                        <flux:radio label="10 seconds" value="10" />
+                        <flux:radio label="15 seconds" value="15" />
                     </flux:radio.group>
                 </div>
 

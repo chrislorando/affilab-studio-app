@@ -24,6 +24,7 @@ class FormContentModal extends Component
     public $image;
     public $aspectRatio = 'landscape';
     public $style = 'professional';
+    public $duration = 15;
     public $isLoading = false;
     public $isEditing = false;
     public $oldImageRef = null;
@@ -35,6 +36,7 @@ class FormContentModal extends Component
             // 'videoPrompt' => 'required|string|max:500',
             'aspectRatio' => ['required', Rule::enum(AspectRatio::class)],
             'style' => ['required', Rule::enum(ContentStyle::class)],
+            'duration' => 'required|integer|in:10,15',
             'image' => 'required|image|max:5120',
         ];
     }
@@ -51,6 +53,7 @@ class FormContentModal extends Component
         // $this->videoPrompt = $content->video_prompt;
         $this->aspectRatio = $content->aspect_ratio;
         $this->style = $content->style->value;
+        $this->duration = $content->duration ?? 15;
         $this->oldImageRef = $content->image_ref;
         $this->isEditing = true;
         $this->showModal = true;
@@ -69,11 +72,13 @@ class FormContentModal extends Component
             // 'videoPrompt', 
             'image', 
             'aspectRatio', 
-            'style', 
+            'style',
+            'duration',
             'contentId', 
             'isEditing', 
             'oldImageRef'
         ]);
+        $this->duration = 15;
         $this->showModal = false;
     }
 
@@ -86,6 +91,7 @@ class FormContentModal extends Component
                 // 'videoPrompt' => 'required|string|max:500',
                 'aspectRatio' => ['required', Rule::enum(AspectRatio::class)],
                 'style' => ['required', Rule::enum(ContentStyle::class)],
+                'duration' => 'required|integer|in:10,15',
             ]);
             // Jika old image tidak ada dan image baru tidak ada, error
             if (!$this->oldImageRef && !$this->image) {
@@ -120,6 +126,7 @@ class FormContentModal extends Component
                     // 'video_prompt' => $this->videoPrompt,
                     'aspect_ratio' => $this->aspectRatio,
                     'style' => $this->style,
+                    'duration' => $this->duration,
                     'status' => ContentStatus::PREPARATION,
                 ]);
 
@@ -140,6 +147,7 @@ class FormContentModal extends Component
                     // 'video_prompt' => $this->videoPrompt,
                     'aspect_ratio' => $this->aspectRatio,
                     'style' => $this->style,
+                    'duration' => $this->duration,
                     'image_ref' => $upload['url'],
                     'status' => ContentStatus::PREPARATION,
                 ]);
@@ -170,6 +178,7 @@ class FormContentModal extends Component
             // 'videoPrompt' => 'required|string|max:500',
             'aspectRatio' => ['required', Rule::enum(AspectRatio::class)],
             'style' => ['required', Rule::enum(ContentStyle::class)],
+            'duration' => 'required|integer|in:10,15',
         ]);
 
         // Jika edit draft dan image kosong (old image didelete), require image baru
@@ -207,6 +216,7 @@ class FormContentModal extends Component
                     // 'video_prompt' => $this->videoPrompt,
                     'aspect_ratio' => $this->aspectRatio,
                     'style' => $this->style,
+                    'duration' => $this->duration,
                 ]);
 
                 session()->flash('success', 'Draft updated successfully!');
@@ -223,6 +233,7 @@ class FormContentModal extends Component
                     // 'video_prompt' => $this->videoPrompt,
                     'aspect_ratio' => $this->aspectRatio,
                     'style' => $this->style,
+                    'duration' => $this->duration,
                     'image_ref' => $upload['url'],
                     'status' => ContentStatus::DRAFT,
                 ]);

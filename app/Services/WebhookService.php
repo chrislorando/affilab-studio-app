@@ -23,6 +23,7 @@ class WebhookService
                     'idea' => $data['idea'],
                     'aspect_ratio' => $data['aspect_ratio'],
                     'style' => $data['style'],
+                    'duration' => $data['duration'],
                     'image_ref' => $data['image_ref'],
                     'user_id' => $data['user_id'],
                     'timestamp' => now()->toIso8601String(),

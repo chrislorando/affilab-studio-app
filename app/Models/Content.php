@@ -27,6 +27,7 @@ class Content extends Model
         'style',
         'status',
         'video_output',
+        'duration',
     ];
 
     protected $casts = [
@@ -35,7 +36,8 @@ class Content extends Model
         'deleted_at' => 'datetime',
         'status' => ContentStatus::class,
         'style' => ContentStyle::class,
-        'aspect_ratio' => AspectRatio::class
+        'aspect_ratio' => AspectRatio::class,
+        'duration' => 'integer',
     ];
 
     /**
