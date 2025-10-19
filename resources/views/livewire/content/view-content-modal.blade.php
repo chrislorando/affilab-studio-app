@@ -12,7 +12,20 @@
                 <div class="grid grid-cols-2 gap-4">
                     <!-- Image -->
                     <div>
-                        <flux:label>{{ __('Reference Image') }}</flux:label>
+                        <flux:label>
+                            {{ __('Reference Image') }} 
+                            @if($content->image_url)
+                                <a 
+                                    href="{{ $content->image_url }}" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    class="text-blue-600 hover:underline ml-1"
+
+                                >
+                                    Download <flux:icon.arrow-down-tray class="inline h-4 w-4" />
+                                </a>
+                            @endif
+                        </flux:label>
                         <div class="mt-2 relative rounded-lg overflow-hidden h-64 border border-zinc-200 dark:border-zinc-700">
                             @if ($content->image_ref)
                                 <div class="absolute inset-0 bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800"></div>
@@ -30,7 +43,20 @@
 
                     <!-- Video -->
                     <div>
-                        <flux:label>{{ __('Generated Video') }}</flux:label>
+                        <flux:label>
+                            {{ __('Generated Video') }}
+                            @if ($content->video_output && $content->status->value === 'success')
+                                <a 
+                                    href="{{ $content->video_url }}" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    class="text-blue-600 hover:underline ml-1"
+
+                                >
+                                    Download <flux:icon.arrow-down-tray class="inline h-4 w-4" />
+                                </a>
+                            @endif
+                        </flux:label>
                         <div class="mt-2 relative rounded-lg overflow-hidden h-64 border border-zinc-200 dark:border-zinc-700 bg-zinc-900">
                             @if ($content->video_output && $content->status->value === 'success')
                                 <video width="100%" controls class="w-full h-64">
@@ -86,26 +112,72 @@
 
                 <!-- Idea Text -->
                 <div>
-                    <flux:label>{{ __('Idea') }}</flux:label>
+                    <div class="flex items-center justify-between">
+                        <flux:label>{{ __('Idea') }}</flux:label>
+                        <button type="button" onclick="copyToClipboard(this, '{{ addslashes($content->idea) }}')" class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 rounded-md hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors">
+                            <flux:icon.document-duplicate class="h-3.5 w-3.5" />
+                            <span class="copy-text">{{ __('Copy') }}</span>
+                        </button>
+                    </div>
                     <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">{{ $content->idea }}</p>
                 </div>
 
                 <!-- Title -->
+                @if($content->title)
+                <div>
+                    <div class="flex items-center justify-between">
+                        <flux:label>{{ __('Title') }}</flux:label>
+                        <button type="button" onclick="copyToClipboard(this, '{{ addslashes($content->title) }}')" class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 rounded-md hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors">
+                            <flux:icon.document-duplicate class="h-3.5 w-3.5" />
+                            <span class="copy-text">{{ __('Copy') }}</span>
+                        </button>
+                    </div>
+                    <p class="mt-2 text-sm font-semibold text-zinc-900 dark:text-white">{{ $content->title }}</p>
+                </div>
+                @else
                 <div>
                     <flux:label>{{ __('Title') }}</flux:label>
-                    <p class="mt-2 text-sm font-semibold text-zinc-900 dark:text-white">{{ $content->title ?? '-' }}</p>
+                    <p class="mt-2 text-sm font-semibold text-zinc-900 dark:text-white">-</p>
                 </div>
+                @endif
 
                 <!-- Caption -->
+                @if($content->caption)
+                <div>
+                    <div class="flex items-center justify-between">
+                        <flux:label>{{ __('Caption') }}</flux:label>
+                        <button type="button" onclick="copyToClipboard(this, '{{ addslashes($content->caption) }}')" class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 rounded-md hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors">
+                            <flux:icon.document-duplicate class="h-3.5 w-3.5" />
+                            <span class="copy-text">{{ __('Copy') }}</span>
+                        </button>
+                    </div>
+                    <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">{{ $content->caption }}</p>
+                </div>
+                @else
                 <div>
                     <flux:label>{{ __('Caption') }}</flux:label>
-                    <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">{{ $content->caption ?? '-' }}</p>
+                    <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300">-</p>
                 </div>
+                @endif
 
                 <!-- Video Prompt -->
                 <div>
-                    <flux:label>{{ __('Video Prompt') }}</flux:label>
-                    <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">{{ $content->video_prompt ?? '-' }}</p>
+                    <div class="flex items-center justify-between">
+                        <flux:label>{{ __('Video Prompt') }}</flux:label>
+                        @if($content->video_prompt)
+                            <button type="button" onclick="copyToClipboard(this, {{ json_encode(json_encode(json_decode($content->video_prompt), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) }})" class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 rounded-md hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors">
+                                <flux:icon.document-duplicate class="h-3.5 w-3.5" />
+                                <span class="copy-text">{{ __('Copy') }}</span>
+                            </button>
+                        @endif
+                    </div>
+                    @if($content->video_prompt)
+                        <div class="mt-2 p-4 bg-zinc-50 dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-700 overflow-auto max-h-96">
+                            <pre class="text-xs text-zinc-700 dark:text-zinc-300 font-mono whitespace-pre-wrap break-words">{{ json_encode(json_decode($content->video_prompt), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre>
+                        </div>
+                    @else
+                        <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300">-</p>
+                    @endif
                 </div>
 
                 <!-- Timestamps -->
@@ -130,14 +202,14 @@
 
                 <!-- Action Buttons -->
                 <div class="flex gap-3 pt-6 justify-end border-t border-zinc-200 dark:border-zinc-700">
-                     @if($content->status->value === 'success' && $content->video_output)
+                    {{-- @if($content->status->value === 'success' && $content->video_output)
                         <flux:button
                             variant="primary"
                             icon="arrow-down"
                         >
                             {{ __('Download') }}
                         </flux:button>
-                    @endif
+                    @endif --}}
 
                     @if($content->status->value === 'draft')
                         <flux:button
@@ -200,3 +272,28 @@
         </div>
     </flux:modal>
 </div>
+
+<script>
+    async function copyToClipboard(button, text) {
+        try {
+            await navigator.clipboard.writeText(text);
+            
+            // Change button text to "Copied"
+            const textSpan = button.querySelector('.copy-text');
+            const originalText = textSpan.textContent;
+            textSpan.textContent = '✓ Copied';
+            button.classList.add('text-green-600', 'dark:text-green-400');
+            button.classList.remove('text-blue-600', 'dark:text-blue-400', 'hover:text-blue-700', 'dark:hover:text-blue-300');
+            
+            // Revert back after 2 seconds
+            setTimeout(() => {
+                textSpan.textContent = originalText;
+                button.classList.remove('text-green-600', 'dark:text-green-400');
+                button.classList.add('text-blue-600', 'dark:text-blue-400', 'hover:text-blue-700', 'dark:hover:text-blue-300');
+            }, 2000);
+        } catch (err) {
+            console.error('Failed to copy:', err);
+            alert('Failed to copy to clipboard');
+        }
+    }
+</script>

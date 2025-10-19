@@ -93,7 +93,11 @@ class TableContent extends Component
     {
         $contents = ContentModel::where('user_id', auth()->user()->id)
             ->when($this->search, function ($query) {
-                $query->where('idea', 'like', '%' . $this->search . '%');
+                $query->where(function ($q) {
+                    $q->whereLike('idea', '%' . $this->search . '%')
+                        ->orWhereLike('title', '%' . $this->search . '%')
+                        ->orWhereLike('caption', '%' . $this->search . '%');
+                });
             })
             ->orderByDesc('created_at')
             ->paginate(10);
