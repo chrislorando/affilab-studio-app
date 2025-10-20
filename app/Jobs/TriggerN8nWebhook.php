@@ -52,9 +52,9 @@ class TriggerN8nWebhook implements ShouldQueue
             // Trigger N8N Webhook
             app(WebhookService::class)->triggerN8nWorkflow($content->id, [
                 'idea' => $content->idea,
-                'aspect_ratio' => $content->aspect_ratio,
+                'aspect_ratio' => $content->aspect_ratio->value,
                 'style' => $content->style->value,
-                'duration' => $content->duration,
+                'duration' => $content->duration->value,
                 'image_ref' => $content->image_ref,
                 'user_id' => $content->user_id,
                 'status' => $content->status->value,
