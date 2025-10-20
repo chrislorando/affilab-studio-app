@@ -10,6 +10,8 @@ enum ContentStyle: string
     case Documentary = 'documentary';
     case Unboxing = 'unboxing';
 
+    case TipsAndTricks = 'tips_and_tricks';
+
     public function label(): string
     {
         return match($this) {
@@ -18,6 +20,7 @@ enum ContentStyle: string
             self::Cinematic => 'Cinematic',
             self::Documentary => 'Documentary',
             self::Unboxing => 'Unboxing',
+            self::TipsAndTricks => 'Tips and Tricks',
         };
     }
 
@@ -29,6 +32,7 @@ enum ContentStyle: string
             self::Cinematic => 'gray',
             self::Documentary => 'green',
             self::Unboxing => 'orange',
+            self::TipsAndTricks => 'teal',
         };
     }
 
@@ -40,6 +44,7 @@ enum ContentStyle: string
             self::Cinematic => 'sparkles',
             self::Documentary => 'book-open',
             self::Unboxing => 'gift',
+            self::TipsAndTricks => 'lightbulb',
         };
     }
 }
