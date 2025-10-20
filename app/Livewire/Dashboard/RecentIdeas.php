@@ -18,7 +18,7 @@ class RecentIdeas extends Component
     {
         $this->ideas = Content::where('user_id', auth()->id())
             ->latest()
-            ->take(9)
+            ->take(4)
             ->get();
     }
 
