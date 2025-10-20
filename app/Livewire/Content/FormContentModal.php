@@ -11,6 +11,7 @@ use App\Jobs\TriggerN8nWebhook;
 use App\Enums\ContentStatus;
 use App\Enums\AspectRatio;
 use App\Enums\ContentStyle;
+use App\Enums\VideoDuration;
 use Illuminate\Validation\Rule;
 
 class FormContentModal extends Component
@@ -36,7 +37,7 @@ class FormContentModal extends Component
             // 'videoPrompt' => 'required|string|max:500',
             'aspectRatio' => ['required', Rule::enum(AspectRatio::class)],
             'style' => ['required', Rule::enum(ContentStyle::class)],
-            'duration' => 'required|integer|in:10,15',
+            'duration' => ['required', Rule::enum(VideoDuration::class)],
             'image' => 'required|image|max:5120',
         ];
     }
@@ -91,7 +92,7 @@ class FormContentModal extends Component
                 // 'videoPrompt' => 'required|string|max:500',
                 'aspectRatio' => ['required', Rule::enum(AspectRatio::class)],
                 'style' => ['required', Rule::enum(ContentStyle::class)],
-                'duration' => 'required|integer|in:10,15',
+                'duration' => ['required', Rule::enum(VideoDuration::class)],
             ]);
             // Jika old image tidak ada dan image baru tidak ada, error
             if (!$this->oldImageRef && !$this->image) {
@@ -178,7 +179,7 @@ class FormContentModal extends Component
             // 'videoPrompt' => 'required|string|max:500',
             'aspectRatio' => ['required', Rule::enum(AspectRatio::class)],
             'style' => ['required', Rule::enum(ContentStyle::class)],
-            'duration' => 'required|integer|in:10,15',
+            'duration' => ['required', Rule::enum(VideoDuration::class)],
         ]);
 
         // Jika edit draft dan image kosong (old image didelete), require image baru
@@ -253,8 +254,36 @@ class FormContentModal extends Component
         }
     }
 
+    /**
+     * Get all aspect ratios from enum
+     */
+    public function getAspectRatios()
+    {
+        return AspectRatio::cases();
+    }
+
+    /**
+     * Get all styles from enum
+     */
+    public function getStyles()
+    {
+        return ContentStyle::cases();
+    }
+
+    /**
+     * Get available durations from enum
+     */
+    public function getDurations()
+    {
+        return VideoDuration::cases();
+    }
+
     public function render()
     {
-        return view('livewire.content.form-content-modal');
+        return view('livewire.content.form-content-modal', [
+            'aspectRatios' => $this->getAspectRatios(),
+            'styles' => $this->getStyles(),
+            'durations' => $this->getDurations(),
+        ]);
     }
 }

@@ -217,6 +217,15 @@
                         </flux:button>
                     @endif --}}
 
+                    <flux:button
+                        wire:click="duplicateContent"
+                        variant="primary"
+                        color="emerald"
+                        icon="document-duplicate"
+                    >
+                        {{ __('Duplicate') }}
+                    </flux:button>
+
                     @if($content->status->value === 'draft')
                         <flux:button
                             wire:click="$dispatch('editDraft', { id: '{{ $content->id }}' })"

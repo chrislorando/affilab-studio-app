@@ -35,27 +35,36 @@
                 <!-- Aspect Ratio -->
                 <div>
                     <flux:radio.group wire:model="aspectRatio" label="Aspect Ratio" variant="segmented">
-                        <flux:radio label="Landscape" value="landscape" />
-                        <flux:radio label="Portrait" value="portrait" />
+                        @foreach ($aspectRatios as $ratio)
+                            <flux:radio 
+                                label="{{ $ratio->label() }} {{ $ratio->icon() }}" 
+                                value="{{ $ratio->value }}" 
+                            />
+                        @endforeach
                     </flux:radio.group>
                 </div>
 
                 <!-- Style -->
                 <div>
                     <flux:radio.group wire:model="style" label="Style" variant="segmented">
-                        <flux:radio label="Professional" value="professional" />
-                        <flux:radio label="Absurd" value="absurd" />
-                        <flux:radio label="Cinematic" value="cinematic" />
-                        <flux:radio label="Documentary" value="documentary" />
-                        <flux:radio label="Unboxing" value="unboxing" />
+                        @foreach ($styles as $styleOption)
+                            <flux:radio 
+                                label="{{ $styleOption->label() }}" 
+                                value="{{ $styleOption->value }}" 
+                            />
+                        @endforeach
                     </flux:radio.group>
                 </div>
 
                 <!-- Duration -->
                 <div>
                     <flux:radio.group wire:model="duration" label="Duration" variant="segmented">
-                        <flux:radio label="10 seconds" value="10" />
-                        <flux:radio label="15 seconds" value="15" />
+                        @foreach ($durations as $duration)
+                            <flux:radio 
+                                label="{{ $duration->label() }}" 
+                                value="{{ $duration->value }}" 
+                            />
+                        @endforeach
                     </flux:radio.group>
                 </div>
 

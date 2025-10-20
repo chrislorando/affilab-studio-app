@@ -86,6 +86,14 @@
                             {{ __('View') }}
                         </flux:button>
 
+                        <flux:button 
+                            wire:click="duplicateContent('{{ $content->id }}')"
+                            size="sm"
+                            variant="primary"
+                            color="emerald"
+                            icon="document-duplicate"
+                        />
+
                         @if($content->status->value === 'draft')
                         <flux:button 
                             wire:click="$dispatch('editDraft', { id: '{{ $content->id }}' })"

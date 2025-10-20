@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Enums\ContentStatus;
 use App\Enums\ContentStyle;
+use App\Enums\VideoDuration;
 use App\Services\S3UploadService;
 
 class Content extends Model
@@ -37,7 +38,7 @@ class Content extends Model
         'status' => ContentStatus::class,
         'style' => ContentStyle::class,
         'aspect_ratio' => AspectRatio::class,
-        'duration' => 'integer',
+        'duration' => VideoDuration::class,
     ];
 
     /**
