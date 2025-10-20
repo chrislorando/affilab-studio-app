@@ -11,13 +11,14 @@
 
 Affilab Studio App is a modern Laravel + Livewire application for managing video content generation workflows. Users can create ideas with images, track processing status in real-time, and integrate with N8N for automated video generation.
 
+![Affilab Studio App](https://github.com/user-attachments/assets/f248654c-6158-4cb7-be23-168bf3ccc11d)
+
 **Key Features:**
 - ✨ Real-time updates with Livewire polling
 - 📸 Image upload to S3/Minio storage
 - 🔄 Queue-based processing with N8N integration
 - 📊 Live status tracking
 - 📱 Responsive, mobile-friendly UI
-- 🔐 Secure authentication & authorization
 
 ---
 
@@ -86,6 +87,7 @@ npm run dev
 - ✅ Search and filter by text
 - ✅ View content details
 - ✅ Delete content and image
+- ✅ Duplicate content
 - ✅ Pagination (10 items/page)
 
 ### Real-Time Updates
@@ -98,14 +100,8 @@ npm run dev
 - ✅ Image upload to S3/Minio
 - ✅ Queue-based processing
 - ✅ N8N webhook integration
-- ✅ 5-state status tracking
+- ✅ 8-state status tracking
 - ✅ Error handling & retry
-
-### Security
-- ✅ Authentication required
-- ✅ User ownership check
-- ✅ Input validation
-- ✅ CSRF protection
 
 ---
 
@@ -113,31 +109,10 @@ npm run dev
 
 | Layer | Tech |
 |-------|------|
-| Framework | Laravel 11 + Livewire 3 |
+| Framework | Laravel 12 + Livewire 3 |
 | Frontend | Tailwind CSS 3 |
 | Database | PostgreSQL (Supabase) |
-| Storage | AWS S3 / Minio |
-| Queue | Database Driver |
-| HTTP | Guzzle 7 |
-| Auth | Laravel Fortify |
+| Storage | AWS S3 / Minio 
 
 ---
 
-## 📜 License
-
-This project is licensed under the MIT License.
-
----
-
-## 👥 Contributors
-
-- **Created**: October 16, 2025
-- **Framework**: Laravel + Livewire
-- **Status**: Production Ready
-
----
-
-
-**Made with ❤️ for Afflab Studio**
-
-Generated: October 16, 2025 | Version: 1.0 | Status: ✅ Production Ready
