@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: affilab-app-${COMPOSE_PROJECT_NAME}
+    volumes:
+      - affilab-public:/var/www/public
+      - affilab-conf:/var/www/docker/nginx/conf.d
+    ports:
+      - '6002:6002'
+    networks:
+      - affilab-network
+
+  webserver:
+    image: nginx:alpine
+    container_name: affilab-nginx-${COMPOSE_PROJECT_NAME}
+    ports:
+      - '8084:80'
+    volumes:
+      - affilab-public:/var/www/public
+      - affilab-conf:/etc/nginx/conf.d
+    depends_on:
+      - app
+    networks:
+      - affilab-network
+
+volumes:
+  affilab-public:
+  affilab-conf:
+
+networks:
+  affilab-network:
+    driver: bridge

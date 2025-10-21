@@ -110,9 +110,9 @@ npm run dev
 | Layer | Tech |
 |-------|------|
 | Framework | Laravel 12 + Livewire 3 |
-| Frontend | Tailwind CSS 3 |
+| Frontend | Tailwind CSS 3 + Flux UI |
 | Database | PostgreSQL (Supabase) |
-| Storage | AWS S3 / Minio 
+| Storage | AWS S3 / Minio |
 
 ---
 
