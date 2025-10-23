@@ -11,7 +11,7 @@
 
 Affilab Studio App is a modern Laravel + Livewire application for managing video content generation workflows. Users can create ideas with images, track processing status in real-time, and integrate with N8N for automated video generation.
 
-![Affilab Studio App](https://github.com/user-attachments/assets/f248654c-6158-4cb7-be23-168bf3ccc11d)
+![Affilab Studio App](https://github.com/user-attachments/assets/31cdcfa3-df5a-4c2c-9b71-c899c1955dda)
 
 **Key Features:**
 - ✨ Real-time updates with Livewire polling
