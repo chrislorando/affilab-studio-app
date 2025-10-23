@@ -91,6 +91,7 @@
                 <div>
                     <flux:field>
                         <flux:label>{{ __('Upload Image') }}</flux:label>
+                        <flux:description class="text-xs">{{ __('Upload product image without people/humans. Sora 2 restricts video generation with people in product photos.') }}</flux:description>
         
                         @if ($isEditing && $oldImageRef)
                             <div class="mb-4">
