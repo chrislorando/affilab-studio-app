@@ -41,6 +41,15 @@ class ViewContentModal extends Component
             abort(403);
         }
         
+        // Parse video_prompt if it's JSON string
+        if ($this->content->video_prompt && is_string($this->content->video_prompt)) {
+            try {
+                $this->content->video_prompt_decoded = json_decode($this->content->video_prompt, true);
+            } catch (\Exception $e) {
+                $this->content->video_prompt_decoded = null;
+            }
+        }
+        
         // Track updates to trigger reactivity
         $this->contentUpdatedAt = $this->content->updated_at?->timestamp;
     }

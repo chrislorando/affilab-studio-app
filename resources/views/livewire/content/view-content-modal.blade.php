@@ -171,15 +171,25 @@
                     <div class="flex items-center justify-between">
                         <flux:label>{{ __('Video Prompt') }}</flux:label>
                         @if($content->video_prompt)
-                            <button type="button" onclick="copyToClipboard(this, {{ json_encode(json_encode(json_decode($content->video_prompt), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)) }})" class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 rounded-md hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors">
-                                <flux:icon.document-duplicate class="h-3.5 w-3.5" />
-                                <span class="copy-text">{{ __('Copy') }}</span>
-                            </button>
+                            @php
+                                $promptData = $content->video_prompt_decoded ?? json_decode($content->video_prompt, true);
+                                $promptJson = $promptData ? json_encode($promptData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : null;
+                            @endphp
+                            @if($promptJson)
+                                <button type="button" onclick="copyToClipboard(this, {{ json_encode($promptJson) }})" class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 rounded-md hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors">
+                                    <flux:icon.document-duplicate class="h-3.5 w-3.5" />
+                                    <span class="copy-text">{{ __('Copy') }}</span>
+                                </button>
+                            @endif
                         @endif
                     </div>
                     @if($content->video_prompt)
+                        @php
+                            $promptData = $content->video_prompt_decoded ?? json_decode($content->video_prompt, true);
+                            $promptJson = $promptData ? json_encode($promptData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) : $content->video_prompt;
+                        @endphp
                         <div class="mt-2 p-4 bg-zinc-50 dark:bg-zinc-900 rounded-lg border border-zinc-200 dark:border-zinc-700 overflow-auto max-h-96">
-                            <pre class="text-xs text-zinc-700 dark:text-zinc-300 font-mono whitespace-pre-wrap break-words">{{ json_encode(json_decode($content->video_prompt), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) }}</pre>
+                            <pre class="text-xs text-zinc-700 dark:text-zinc-300 font-mono whitespace-pre-wrap break-words">{{ $promptJson }}</pre>
                         </div>
                     @else
                         <p class="mt-2 text-sm text-zinc-700 dark:text-zinc-300">-</p>
