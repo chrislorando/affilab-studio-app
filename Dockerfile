@@ -60,7 +60,7 @@ RUN mkdir -p storage/framework/{cache,sessions,testing,views} \
     && chmod 664 database/database.sqlite
 
 # Copy supervisord config
-COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY ./docker/affilab-worker.conf /etc/supervisor/conf.d/affilab-worker.conf
 
 EXPOSE 9000
-CMD ["/bin/bash", "-c", "php-fpm & /usr/bin/supervisord -n -c /etc/supervisor/conf.d/supervisord.conf"]
+CMD ["/bin/bash", "-c", "php-fpm & /usr/bin/supervisord -n -c /etc/supervisor/conf.d/affilab-worker.conf"]
