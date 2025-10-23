@@ -85,7 +85,12 @@ class FormContentModal extends Component
 
     public function saveIdea()
     {
-        // Jika edit draft, image tidak required KECUALI old image sudah didelete
+        $user = auth()->user();
+        if($user->quota <= 0) {
+            session()->flash('error', 'You have reached your quota limit. Please upgrade your plan to create more content.');
+            return;
+        }
+
         if ($this->isEditing) {
             $this->validate([
                 'idea' => 'required|string|max:255',
@@ -153,7 +158,7 @@ class FormContentModal extends Component
                     'status' => ContentStatus::PREPARATION,
                 ]);
 
-                // 3. Dispatch Job ke Queue
+                // 4. Dispatch Job ke Queue
                 TriggerN8nWebhook::dispatch($content->id);
 
                 session()->flash('success', 'Idea saved and queued for processing!');

@@ -10,6 +10,25 @@
         @endif
     </div>
 
+    <!-- Flash Messages -->
+    @if (session('success'))
+        <div class="mt-4 p-4 bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 rounded-lg">
+            <div class="flex items-start gap-3">
+                <flux:icon.check-circle class="w-5 h-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+                <p class="text-sm text-green-800 dark:text-green-300">{{ session('success') }}</p>
+            </div>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="mt-4 p-4 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 rounded-lg">
+            <div class="flex items-start gap-3">
+                <flux:icon.exclamation-circle class="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+                <p class="text-sm text-red-800 dark:text-red-300">{{ session('error') }}</p>
+            </div>
+        </div>
+    @endif
+
     <!-- Form -->
     <form wire:submit="saveIdea" class="space-y-4 mt-4">
                 <!-- Idea Input -->
