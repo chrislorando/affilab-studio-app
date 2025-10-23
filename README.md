@@ -30,6 +30,12 @@ Affilab Studio App is a modern Laravel + Livewire application for managing video
 - Node.js & npm
 - PostgreSQL (Supabase recommended)
 
+### N8N Workflow Requirements
+The N8N workflow requires the following integrations to be configured:
+- **OpenAI API** - For AI-powered content generation and narration
+- **Kie AI** - For access the Best Video, Image & Music Models in One API
+- **Supabase** - For database operations
+
 ### 1️⃣ Setup ENV
 
 Edit `.env` file:
@@ -113,6 +119,17 @@ npm run dev
 | Frontend | Tailwind CSS 3 + Flux UI |
 | Database | PostgreSQL (Supabase) |
 | Storage | AWS S3 / Minio |
+
+---
+
+## References
+
+ - n8n service  
+https://sumopod.com/register?ref=b9120f87-b648-40ef-b5b4-ec62bcfe72e0  
+
+ - Sora 2 workflow (Base workflow - Modified)
+https://lynk.id/azisbajri/o517wngvk6og
+> ℹ️ **Note**: The current N8N workflow is a modified version of the Sora 2 workflow reference above, customized for Affilab Studio's specific content generation requirements. To obtain the original Sora 2 workflow, purchase it from the link above.
 
 ---
 
