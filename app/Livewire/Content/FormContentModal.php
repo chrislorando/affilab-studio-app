@@ -139,6 +139,9 @@ class FormContentModal extends Component
                 // Dispatch Job ke Queue
                 TriggerN8nWebhook::dispatch($content->id);
 
+                // Decrement user quota
+                $user->decrement('quota');
+
                 session()->flash('success', 'Draft updated and queued for processing!');
             } else {
                 // Create new idea with PREPARATION status
@@ -160,6 +163,9 @@ class FormContentModal extends Component
 
                 // 4. Dispatch Job ke Queue
                 TriggerN8nWebhook::dispatch($content->id);
+
+                // Decrement user quota
+                $user->decrement('quota');
 
                 session()->flash('success', 'Idea saved and queued for processing!');
             }
