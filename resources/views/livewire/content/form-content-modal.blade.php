@@ -53,7 +53,7 @@
 
                 <!-- Aspect Ratio -->
                 <div>
-                    <flux:radio.group wire:model="aspectRatio" label="Aspect Ratio" variant="segmented">
+                    <flux:radio.group wire:model="aspectRatio" label="Aspect Ratio" variant="segmented" size="sm">
                         @foreach ($aspectRatios as $ratio)
                             <flux:radio 
                                 label="{{ $ratio->label() }} {{ $ratio->icon() }}" 
@@ -65,7 +65,7 @@
 
                 <!-- Style -->
                 <div>
-                    <flux:radio.group wire:model="style" label="Style" variant="segmented">
+                    <flux:radio.group wire:model="style" label="Style" variant="segmented" size="sm">
                         @foreach ($styles as $styleOption)
                             <flux:radio 
                                 label="{{ $styleOption->label() }}" 
@@ -77,7 +77,7 @@
 
                 <!-- Duration -->
                 <div>
-                    <flux:radio.group wire:model="duration" label="Duration" variant="segmented">
+                    <flux:radio.group wire:model="duration" label="Duration" variant="segmented" size="sm">
                         @foreach ($durations as $duration)
                             <flux:radio 
                                 label="{{ $duration->label() }}" 
