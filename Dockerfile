@@ -62,5 +62,7 @@ RUN mkdir -p storage/framework/{cache,sessions,testing,views} \
 # Copy supervisord config
 COPY ./docker/affilab-worker.conf /etc/supervisor/conf.d/affilab-worker.conf
 
+RUN echo "[supervisord]\nnodaemon=true\nuser=root\n\n[include]\nfiles=/etc/supervisor/conf.d/*.conf" > /etc/supervisor/supervisord.conf
+
 EXPOSE 9000
-CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/conf.d/affilab-worker.conf"]
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
