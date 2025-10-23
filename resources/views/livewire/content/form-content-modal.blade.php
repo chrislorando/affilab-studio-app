@@ -189,19 +189,20 @@
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="flex gap-3 pt-6 justify-between border-t border-zinc-200 dark:border-zinc-700">
+                <div class="flex flex-col-reverse sm:flex-row gap-3 pt-6 sm:justify-between border-t border-zinc-200 dark:border-zinc-700">
                     <flux:modal.close>
-                        <flux:button variant="ghost">
+                        <flux:button variant="ghost" class="w-full sm:w-auto">
                             {{ __('Cancel') }}
                         </flux:button>
                     </flux:modal.close>
-                    <div class="flex gap-2">
+                    <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
                         <flux:button
                             type="button"
                             wire:click="saveDraft"
                             variant="outline"
                             icon="document"
                             wire:loading.attr="disabled"
+                            class="w-full sm:w-auto"
                         >
                             {{ __('Save as Draft') }}
                         </flux:button>
@@ -209,7 +210,7 @@
                             type="submit"
                             variant="primary"
                             wire:loading.attr="disabled"
-                            class="flex items-center gap-2"
+                            class="flex items-center justify-center gap-2 w-full sm:w-auto"
                         >
                             <span wire:loading.remove>💾 {{ __('Save & Process') }}</span>
                             <span wire:loading class="flex items-center gap-2">

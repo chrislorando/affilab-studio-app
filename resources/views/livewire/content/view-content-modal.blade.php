@@ -9,7 +9,7 @@
                 </div>
 
                 <!-- Image & Video Side by Side -->
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <!-- Image -->
                     <div>
                         <flux:label>
@@ -26,13 +26,13 @@
                                 </a>
                             @endif
                         </flux:label>
-                        <div class="mt-2 relative rounded-lg overflow-hidden h-64 border border-zinc-200 dark:border-zinc-700">
+                        <div class="mt-2 relative rounded-lg overflow-hidden h-48 sm:h-64 border border-zinc-200 dark:border-zinc-700">
                             @if ($content->image_ref)
                                 <div class="absolute inset-0 bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800"></div>
                                 <img 
                                     src="{{ $content->image_url }}" 
                                     alt="{{ $content->idea }}" 
-                                    class="relative w-full h-64 object-contain"
+                                    class="relative w-full h-48 sm:h-64 object-contain"
                                 />
                             @else
                                 <div class="absolute inset-0 bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800"></div>
@@ -57,9 +57,9 @@
                                 </a>
                             @endif
                         </flux:label>
-                        <div class="mt-2 relative rounded-lg overflow-hidden h-64 border border-zinc-200 dark:border-zinc-700 bg-zinc-900">
+                        <div class="mt-2 relative rounded-lg overflow-hidden h-48 sm:h-64 border border-zinc-200 dark:border-zinc-700 bg-zinc-900">
                             @if ($content->video_output && $content->status->value === 'success')
-                                <video width="100%" controls class="w-full h-64">
+                                <video width="100%" controls class="w-full h-48 sm:h-64">
                                     <source src="{{ $content->video_url }}" type="video/mp4">
                                 </video>
                             @elseif($content->status->value === 'generating')
@@ -85,7 +85,7 @@
                 </div>
 
                 <!-- Status & Meta Info -->
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <flux:label>{{ __('Status') }}</flux:label>
                         <p>
@@ -101,7 +101,7 @@
                 </div>
 
                 <!-- Duration & Style -->
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <flux:label>{{ __('Duration') }}</flux:label>
                         <p class="mt-2 text-sm font-medium text-zinc-900 dark:text-white">⏱️ {{ $content->duration ?? 15 }}s</p>
@@ -197,7 +197,7 @@
                 </div>
 
                 <!-- Timestamps -->
-                <div class="grid grid-cols-2 gap-4 pt-4 border-t border-zinc-200 dark:border-zinc-700">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-zinc-200 dark:border-zinc-700">
                     <div>
                         <flux:label class="text-xs">{{ __('Created') }}</flux:label>
                         <p class="mt-1 text-xs text-zinc-500 dark:text-zinc-400">{{ $content->created_at->format('d M Y, H:i') }}</p>
@@ -217,48 +217,53 @@
                 @endif
 
                 <!-- Action Buttons -->
-                <div class="flex gap-3 pt-6 justify-end border-t border-zinc-200 dark:border-zinc-700">
-                    {{-- @if($content->status->value === 'success' && $content->video_output)
-                        <flux:button
-                            variant="primary"
-                            icon="arrow-down"
-                        >
-                            {{ __('Download') }}
-                        </flux:button>
-                    @endif --}}
-
-                    <flux:button
-                        wire:click="duplicateContent"
-                        variant="primary"
-                        color="emerald"
-                        icon="document-duplicate"
-                    >
-                        {{ __('Duplicate') }}
-                    </flux:button>
-
-                    @if($content->status->value === 'draft')
-                        <flux:button
-                            wire:click="$dispatch('editDraft', { id: '{{ $content->id }}' })"
-                            variant="primary"
-                            color="blue"
-                            icon="pencil"
-                        >
-                            {{ __('Edit') }}
-                        </flux:button>
-                    @endif
-
-                    <flux:button
-                        wire:click="confirmDelete"
-                        variant="danger"
-                        icon="trash"
-                    >
-                        {{ __('Delete') }}
-                    </flux:button>
-
-                    <flux:modal.close>
-                        <flux:button variant="ghost">{{ __('Close') }}</flux:button>
+                <div class="flex flex-col-reverse sm:flex-row gap-3 pt-6 sm:justify-between border-t border-zinc-200 dark:border-zinc-700">
+                    <flux:modal.close class="w-full sm:w-auto">
+                        <flux:button variant="ghost" class="w-full sm:w-auto">{{ __('Close') }}</flux:button>
                     </flux:modal.close>
-                   
+                    
+                    <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                        {{-- @if($content->status->value === 'success' && $content->video_output)
+                            <flux:button
+                                variant="primary"
+                                icon="arrow-down"
+                                class="w-full sm:w-auto"
+                            >
+                                {{ __('Download') }}
+                            </flux:button>
+                        @endif --}}
+
+                        <flux:button
+                            wire:click="duplicateContent"
+                            variant="primary"
+                            color="emerald"
+                            icon="document-duplicate"
+                            class="w-full sm:w-auto"
+                        >
+                            {{ __('Duplicate') }}
+                        </flux:button>
+
+                        @if($content->status->value === 'draft')
+                            <flux:button
+                                wire:click="$dispatch('editDraft', { id: '{{ $content->id }}' })"
+                                variant="primary"
+                                color="blue"
+                                icon="pencil"
+                                class="w-full sm:w-auto"
+                            >
+                                {{ __('Edit') }}
+                            </flux:button>
+                        @endif
+
+                        <flux:button
+                            wire:click="confirmDelete"
+                            variant="danger"
+                            icon="trash"
+                            class="w-full sm:w-auto"
+                        >
+                            {{ __('Delete') }}
+                        </flux:button>
+                    </div>
                 </div>
             </div>
         @endif
