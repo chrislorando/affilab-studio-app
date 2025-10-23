@@ -116,3 +116,6 @@ npm run dev
 
 ---
 
+## Demo
+
+http://affilab.demolite.my.id/
