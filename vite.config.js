@@ -14,5 +14,6 @@ export default defineConfig({
     ],
     server: {
         cors: true,
+        https: process.env.APP_ENV === 'production' ? false : true,
     },
 });
